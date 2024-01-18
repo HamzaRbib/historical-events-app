@@ -9,7 +9,9 @@ function Filter({ setEventsData }) {
     category === "All"
       ? setEventsData(data)
       : setEventsData(
-          data.filter((historicalEvent) => historicalEvent.category === category)
+          data.filter(
+            (historicalEvent) => historicalEvent.category === category
+          )
         );
   }
 

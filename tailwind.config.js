@@ -6,6 +6,9 @@ export default {
       colors: {
         "dark-bg": "#1e1e1e",
       },
+      spacing: {
+        'popup-larg': '26rem',
+      }
     },
   },
   plugins: [],
