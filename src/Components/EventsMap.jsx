@@ -1,10 +1,14 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { FaRegStar } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa6";
+import "leaflet/dist/leaflet.css";
 
-function EventsMap({ eventsData, favourite, setFavourite }) {
-  let startingPosition = [51.505, -0.09];
+function EventsMap({ eventsData, favourite, setFavourite, startingPosition }) {
+  function GoToLocation() {
+    const map = useMap();
+    map.flyTo(startingPosition, 15);
+    return null;
+  }
   return (
     <MapContainer
       center={startingPosition}
@@ -29,6 +33,7 @@ function EventsMap({ eventsData, favourite, setFavourite }) {
           </Marker>
         );
       })}
+      <GoToLocation />
     </MapContainer>
   );
 }
@@ -36,17 +41,24 @@ function EventsMap({ eventsData, favourite, setFavourite }) {
 export default EventsMap;
 
 function FavouriteButton({ event, favourite, setFavourite }) {
-  const isFavourite = favourite.includes(event.title);
+  const inFavourite = favourite.some((fav) => fav.id === event.id);
 
   function handleClick() {
-    isFavourite
-      ? setFavourite(favourite.filter((fav) => fav !== event.title))
-      : setFavourite([event.title, ...favourite]);
+    if (inFavourite) {
+      localStorage.setItem(
+        "favourites",
+        JSON.stringify(favourite.filter((fav) => fav.id !== event.id))
+      );
+      setFavourite(favourite.filter((fav) => fav.id !== event.id));
+    } else {
+      localStorage.setItem("favourites", JSON.stringify([event, ...favourite]));
+      setFavourite([event, ...favourite]);
+    }
   }
 
   return (
     <button className="flex gap-1" onClick={() => handleClick()}>
-      {isFavourite ? (
+      {inFavourite ? (
         <>
           <FaStar className="text-yellow-400 font-bold text-xl" />
           <span className="pt-1 font-bold">Unfavourite</span>
