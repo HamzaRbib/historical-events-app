@@ -18,7 +18,7 @@ function Filter({ setEventsData }) {
   return (
     <select
       onChange={(e) => filterEventsData(e.target.value)}
-      className="bg-dark-bg text-white mb-8 p-2.5 w-60 border-2 rounded-lg border-gray-400 focus:ring-blue-500 focus:border-blue-500"
+      className="bg-dark-bg text-white ml-8 mb-4 mt-2 p-2.5 w-60 border-2 xl:mt-6 rounded-lg border-gray-400 focus:ring-blue-500 focus:border-blue-500"
     >
       {["All", ...categorys].map((category, index) => {
         return (

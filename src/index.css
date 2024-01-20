@@ -10,8 +10,9 @@
 }
 
 .map{
-    height: 80vh;
-    width: 70vw;
+    height: 50vh;
+    margin: 0 2rem;
+    @apply xl:w-[70vw] xl:h-[85vh] xl:mr-4
 }
 
 .leaflet-popup-content-wrapper{
@@ -39,8 +40,4 @@
 
 .fv::-webkit-scrollbar{
   width: 0;
-}
-
-.fv{
-  height: 90vh;
 }

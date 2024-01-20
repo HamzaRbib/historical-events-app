@@ -1,17 +1,13 @@
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { FaRegStar } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa6";
+import GoToLocation from "./GoToLocation";
 import "leaflet/dist/leaflet.css";
 
-function EventsMap({ eventsData, favourite, setFavourite, startingPosition }) {
-  function GoToLocation() {
-    const map = useMap();
-    map.flyTo(startingPosition, 15);
-    return null;
-  }
+function EventsMap({ eventsData, favourite, setFavourite, location }) {
   return (
     <MapContainer
-      center={startingPosition}
+      center={[38.8977, -77.0365]}
       zoom={13}
       scrollWheelZoom={true}
       className="map rounded-2xl"
@@ -33,7 +29,7 @@ function EventsMap({ eventsData, favourite, setFavourite, startingPosition }) {
           </Marker>
         );
       })}
-      <GoToLocation />
+      <GoToLocation location={location} />
     </MapContainer>
   );
 }

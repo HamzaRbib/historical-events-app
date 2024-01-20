@@ -7,22 +7,22 @@ import Favourites from "./Components/Favourites";
 function App() {
   const [historicalEvents, setHistoricalEvents] = useState(data);
   const [favourite, setFavourite] = useState(JSON.parse(localStorage.getItem("favourites")) ?? []);
-  const [startingPosition, setStartingPosition] = useState([38.8977, -77.0365]);
+  const [location, setLocation] = useState([]);
 
   return (
-    <main className="flex h-full w-full p-8">
+    <main className="flex flex-col h-full w-full xl:flex-row">
       <div className="flex flex-col">
         <Filter setEventsData={setHistoricalEvents} />
         <EventsMap
           eventsData={historicalEvents}
           favourite={favourite}
           setFavourite={setFavourite}
-          startingPosition={startingPosition}
+          location={location}
         />
       </div>
       <Favourites
         favourite={favourite}
-        setStartingPosition={setStartingPosition}
+        setLocation={setLocation}
       />
     </main>
   );
